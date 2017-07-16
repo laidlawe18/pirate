@@ -40,4 +40,17 @@ public class PlayerControl : MonoBehaviour {
             }
         }
     }
+
+	public void OnChildClick (PlayerControllable pc) {
+        
+        for (int i = 0; i < controllables.Length; i++)
+        {
+            if (controllables[i].Equals(pc))
+            {
+                controllables[currActive].isActive = false; 
+                currActive = i;
+                controllables[currActive].isActive = true;
+            }
+        }
+	}
 }
