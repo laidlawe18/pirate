@@ -15,7 +15,7 @@ public class BoatMovement : PlayerControllable {
 	void FixedUpdate () {
         if (isActive)
         {
-            rb2d.AddForce(transform.right * -1 * Input.GetAxis("Vertical"));
+            rb2d.AddForce(transform.up * Input.GetAxis("Vertical"));
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.z -= 0.5f * Input.GetAxis("Horizontal");
             transform.rotation = Quaternion.Euler(rotation);
