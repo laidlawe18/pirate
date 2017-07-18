@@ -23,20 +23,20 @@ public class PlayerControl : MonoBehaviour {
         {
             if (Input.GetButtonDown("Switch") && Input.GetAxis("Switch") > 0)
             {
-                controllables[currActive].isActive = false;
+                controllables[currActive].Deactivate();
                 currActive += 1;
                 currActive %= controllables.Length;
-                controllables[currActive].isActive = true;
+                controllables[currActive].Activate();
             }
             if (Input.GetButtonDown("Switch") && Input.GetAxis("Switch") < 0)
             {
-                controllables[currActive].isActive = false;
+                controllables[currActive].Deactivate();
                 currActive -= 1;
                 if (currActive < 0)
                 {
                     currActive = controllables.Length - 1;
                 }
-                controllables[currActive].isActive = true;
+                controllables[currActive].Activate();
             }
         }
     }
@@ -47,9 +47,9 @@ public class PlayerControl : MonoBehaviour {
         {
             if (controllables[i].Equals(pc))
             {
-                controllables[currActive].isActive = false; 
+                controllables[currActive].Deactivate(); 
                 currActive = i;
-                controllables[currActive].isActive = true;
+                controllables[currActive].Activate();
             }
         }
 	}

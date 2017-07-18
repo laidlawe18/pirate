@@ -22,4 +22,10 @@ public class BoatMovement : PlayerControllable {
         }
         
 	}
+
+    public override void Activate()
+    {
+        isActive = true;
+        GetComponentInChildren<Select>().Activate();
+    }
 }

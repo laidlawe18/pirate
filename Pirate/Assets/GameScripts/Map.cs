@@ -11,6 +11,7 @@ public class Map : MonoBehaviour {
     public int pixelSize;
     int[,] map;
     public int landCutoff = 3;
+    public GameObject island;
 
 	// Use this for initialization
 	void Start () {
@@ -36,20 +37,17 @@ public class Map : MonoBehaviour {
         sr.sprite = sprite;
 
         Destroy(GetComponent<PolygonCollider2D>());
-        gameObject.AddComponent<PolygonCollider2D>();
-
+        PolygonCollider2D pc = gameObject.AddComponent<PolygonCollider2D>();
+        print(pc.GetPath(0).Length);
+        for (int i = 0; i < pc.pathCount; i++)
+        {
+            GameObject newIsland = Instantiate(island, new Vector3(0, 0, 0), Quaternion.identity);
+            newIsland.transform.parent = gameObject.transform;
+            newIsland.GetComponent<PolygonCollider2D>().SetPath(0, pc.GetPath(i));
+        }
+        Destroy(pc);
         sprite = Sprite.Create(tex, new Rect(0, 0, width, height), new Vector2(.5f, .5f));
         sr.sprite = sprite;
-
-    }
-
-    bool CanVisit(int i, int j, bool[,] visited)
-    {
-        if (i >= 0 && j >= 0 && i < visited.GetLength(0) && j < visited.GetLength(1) && !visited[i, j])
-        {
-            return true;
-        }
-        return false;
     }
 
     // Update is called once per frame

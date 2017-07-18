@@ -20,4 +20,14 @@ public class PlayerControllable : MonoBehaviour {
         PlayerControl pc = GetComponentInParent<PlayerControl>();
         pc.OnChildClick(this);
 	}
+
+    public virtual void Activate()
+    {
+        isActive = true;
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
+    }
 }
