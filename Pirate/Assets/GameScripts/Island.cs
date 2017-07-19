@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class Island : MonoBehaviour {
-
     Text text;
 
     // Use this for initialization
