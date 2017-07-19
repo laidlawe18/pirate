@@ -41,9 +41,15 @@ public class Map : MonoBehaviour {
         print(pc.GetPath(0).Length);
         for (int i = 0; i < pc.pathCount; i++)
         {
-            GameObject newIsland = Instantiate(island, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject newIsland = Instantiate(island, pc.GetPath(i)[0], Quaternion.identity);
             newIsland.transform.parent = gameObject.transform;
-            newIsland.GetComponent<PolygonCollider2D>().SetPath(0, pc.GetPath(i));
+            Vector2[] vecs = pc.GetPath(i);
+            Vector2 pos = vecs[0];
+            for (int j = 0; j < vecs.Length; j++)
+            {
+                vecs[j] -= pos;
+            }
+            newIsland.GetComponent<PolygonCollider2D>().SetPath(0, vecs);
         }
         Destroy(pc);
         sprite = Sprite.Create(tex, new Rect(0, 0, width, height), new Vector2(.5f, .5f));

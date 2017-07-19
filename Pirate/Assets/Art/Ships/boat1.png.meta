@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: cecdb5348a6e04cc3be2b1b89b2e1f14
-timeCreated: 1500316207
+timeCreated: 1500473680
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -24,6 +24,22 @@ TextureImporter:
     21300034: boat1_17
     21300036: boat1_18
     21300038: boat1_19
+    21300040: boat1_20
+    21300042: boat1_21
+    21300044: boat1_22
+    21300046: boat1_23
+    21300048: boat1_24
+    21300050: boat1_25
+    21300052: boat1_26
+    21300054: boat1_27
+    21300056: boat1_28
+    21300058: boat1_29
+    21300060: boat1_30
+    21300062: boat1_31
+    21300064: boat1_32
+    21300066: boat1_33
+    21300068: boat1_34
+    21300070: boat1_35
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -94,11 +110,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2048
+        y: 4096
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -107,11 +123,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 2048
+        y: 4096
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -120,11 +136,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 2048
+        y: 4096
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -133,11 +149,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 2048
+        y: 4096
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -146,11 +162,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1536
+        y: 3584
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -159,11 +175,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 1536
+        y: 3584
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -172,11 +188,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 1536
+        y: 3584
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -185,11 +201,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 1536
+        y: 3584
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -198,11 +214,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1024
+        y: 3072
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -211,11 +227,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 1024
+        y: 3072
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -224,11 +240,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 1024
+        y: 3072
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -237,11 +253,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 1024
+        y: 3072
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -250,11 +266,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 512
+        y: 2560
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -263,11 +279,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 512
+        y: 2560
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -276,11 +292,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 512
+        y: 2560
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -289,11 +305,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 512
+        y: 2560
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -302,11 +318,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 2048
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -315,11 +331,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 0
+        y: 2048
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -328,11 +344,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 0
+        y: 2048
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -341,11 +357,219 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_21
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_22
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_23
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_25
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_26
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_27
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_29
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_30
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_31
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_32
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 512
         height: 512
       alignment: 9
-      pivot: {x: 0.48, y: 0.7}
+      pivot: {x: 0.51598406, y: 0.54628074}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_33
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_34
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: boat1_35
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.48, y: 0.65}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

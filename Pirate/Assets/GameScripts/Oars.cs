@@ -18,13 +18,12 @@ public class Oars : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (boat.velocity.magnitude < .01)
-        {
-            anim.SetInteger("State", 1);
-        }
-        else
+        if (GetComponentInParent<BoatMovement>().isActive && Input.GetAxis("Vertical") > 0)
         {
             anim.SetInteger("State", 2);
+        } else
+        {
+            anim.SetInteger("State", 1);
         }
     }
 }
