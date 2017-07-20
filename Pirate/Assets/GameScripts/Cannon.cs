@@ -36,7 +36,7 @@ public class Cannon : MonoBehaviour {
 
             GameObject ball = Instantiate(cannonBall, transform.rotation * spawnPoint + transform.position, transform.rotation);
             ball.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0, 0, Random.Range(-2, 2)) * transform.rotation * force);
-            Destroy(ball, 3);
+            Destroy(ball, 1.5f);
         }
     }
 }

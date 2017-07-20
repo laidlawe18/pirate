@@ -8,13 +8,18 @@ public class BoatMovement : PlayerControllable {
     Cannon[] cannons;
     GameObject island;
     public GameObject dock;
+    Queue<GameObject> clickPoints;
+    public GameObject clickPoint;
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
         cannons = GetComponentsInChildren<Cannon>();
         isActive = false;
         island = null;
+        clickPoints = new Queue<GameObject>();
 	}
+
+
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -34,7 +39,7 @@ public class BoatMovement : PlayerControllable {
                     }
                 }
             }
-            if (Input.GetButton("BuildDock") && island != null)
+            if (Input.GetButtonDown("BuildDock") && island != null)
             {
                 Vector2 point1 = new Vector2(0, 0);
                 Vector2 point2 = new Vector2(0, 0);
@@ -50,7 +55,42 @@ public class BoatMovement : PlayerControllable {
                         point2 = pts[(i + 1)%pts.Length] + (Vector2)island.transform.position;
                     }
                 }
-                GameObject newDock = Instantiate(dock, new Vector2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2), Quaternion.LookRotation(Vector3.forward, -(new Vector2((point2-point1).y,-(point2 - point1).x))));
+                GameObject newDock = Instantiate(dock, new Vector2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2), Quaternion.LookRotation(Vector3.forward, -(new Vector2((point2 - point1).y, -(point2 - point1).x))));
+            }
+
+            if (Input.GetButtonDown("Click"))
+            {
+                Vector2 pt = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (!Physics2D.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction))
+                {
+                    if (!Input.GetButton("Shift"))
+                    {
+                        while (clickPoints.Count > 0)
+                        {
+                            Destroy(clickPoints.Dequeue());
+                        }
+                    }
+                    clickPoints.Enqueue(Instantiate(clickPoint, pt, Quaternion.identity));
+                }
+            }
+        }
+        if (clickPoints.Count > 0)
+        {
+            Vector3 pt = clickPoints.Peek().transform.position;
+            if ((pt - transform.position).magnitude < .1)
+            {
+                GameObject go = clickPoints.Dequeue();
+                Destroy(go);
+            }
+            else
+            {
+                Vector3 rot = Quaternion.FromToRotation(transform.up, pt - transform.position).eulerAngles;
+                Vector3 boatRot = transform.rotation.eulerAngles;
+                rot.z = rot.z > 180 ? rot.z - 360 : rot.z;
+                boatRot.z += Mathf.Sign(rot.z) * Mathf.Min(Mathf.Abs(rot.z), .5f);
+                transform.rotation = Quaternion.Euler(boatRot);
+
+                rb2d.AddForce(100 * transform.up * Vector2.Dot((pt - transform.position).normalized, transform.up.normalized));
             }
         }
 
@@ -59,8 +99,21 @@ public class BoatMovement : PlayerControllable {
 
     public override void Activate()
     {
-        isActive = true;
+        base.Activate();
         GetComponentInChildren<Select>().Activate();
+        foreach (GameObject go in clickPoints)
+        {
+            go.SetActive(true);
+        }
+    }
+
+    public override void Deactivate()
+    {
+        base.Deactivate();
+        foreach (GameObject go in clickPoints)
+        {
+            go.SetActive(false);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -72,16 +125,12 @@ public class BoatMovement : PlayerControllable {
         }
     }
 
-    private void CreateDock()
-    {
-
-    }
-
     public void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<Island>() != null)
         {
             other.gameObject.GetComponent<Island>().OutOfRange();
+            island = null;
         }
     }
 }

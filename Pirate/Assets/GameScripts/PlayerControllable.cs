@@ -26,7 +26,7 @@ public class PlayerControllable : MonoBehaviour {
         isActive = true;
     }
 
-    public void Deactivate()
+    public virtual void Deactivate()
     {
         isActive = false;
     }
