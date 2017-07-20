@@ -10,6 +10,7 @@ public class BoatMovement : PlayerControllable {
     public GameObject dock;
     Queue<GameObject> clickPoints;
     public GameObject clickPoint;
+    bool oarsActive;
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -17,6 +18,7 @@ public class BoatMovement : PlayerControllable {
         isActive = false;
         island = null;
         clickPoints = new Queue<GameObject>();
+        oarsActive = false;
 	}
 
 
@@ -25,8 +27,10 @@ public class BoatMovement : PlayerControllable {
 	void FixedUpdate () {
         if (isActive)
         {
+            oarsActive = false;
             if (Mathf.Abs(Input.GetAxis("Vertical")) > .005 || Mathf.Abs(Input.GetAxis("Horizontal")) > .005)
             {
+                oarsActive = true;
                 while (clickPoints.Count > 0)
                 {
                     Destroy(clickPoints.Dequeue());
@@ -56,7 +60,7 @@ public class BoatMovement : PlayerControllable {
                 rot.z = rot.z > 180 ? rot.z - 360 : rot.z;
                 boatRot.z += Mathf.Sign(rot.z) * Mathf.Min(Mathf.Abs(rot.z), .5f);
                 transform.rotation = Quaternion.Euler(boatRot);
-
+                oarsActive = true;
                 rb2d.AddForce(100 * transform.up * Vector2.Dot((pt - transform.position).normalized, transform.up.normalized));
             }
         }
@@ -154,5 +158,10 @@ public class BoatMovement : PlayerControllable {
             other.gameObject.GetComponent<Island>().OutOfRange();
             island = null;
         }
+    }
+
+    public bool OarsActive()
+    {
+        return oarsActive;
     }
 }
