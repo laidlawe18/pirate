@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 
-    PlayerControllable[] controllables;
+    List<PlayerControllable> controllables;
     public int currActive;
 
 	// Use this for initialization
 	void Start () {
-        controllables = GetComponentsInChildren<PlayerControllable>();
+        controllables = new List<PlayerControllable>(GetComponentsInChildren<PlayerControllable>());
         currActive = 0;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (controllables.Length == 0)
+        if (controllables.Count == 0)
         {
             currActive = -1;
         }
@@ -25,7 +25,7 @@ public class PlayerControl : MonoBehaviour {
             {
                 controllables[currActive].Deactivate();
                 currActive += 1;
-                currActive %= controllables.Length;
+                currActive %= controllables.Count;
                 controllables[currActive].Activate();
             }
             if (Input.GetButtonDown("Switch") && Input.GetAxis("Switch") < 0)
@@ -34,7 +34,7 @@ public class PlayerControl : MonoBehaviour {
                 currActive -= 1;
                 if (currActive < 0)
                 {
-                    currActive = controllables.Length - 1;
+                    currActive = controllables.Count - 1;
                 }
                 controllables[currActive].Activate();
             }
@@ -44,7 +44,7 @@ public class PlayerControl : MonoBehaviour {
 	public void OnChildClick (PlayerControllable pc) {
         
 
-        for (int i = 0; i < controllables.Length; i++)
+        for (int i = 0; i < controllables.Count; i++)
         {
             if (controllables[i].Equals(pc))
             {
@@ -54,4 +54,9 @@ public class PlayerControl : MonoBehaviour {
             }
         }
 	}
+
+    public void AddControllable(PlayerControllable pc)
+    {
+        controllables.Add(pc);
+    }
 }

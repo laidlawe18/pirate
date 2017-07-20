@@ -241,6 +241,7 @@ MonoBehaviour:
   - {fileID: 1340210139846386, guid: 18bf67e61ebef834c9ef121e14b5675f, type: 2}
   - {fileID: 1658115885229504, guid: afdb78cdd42c4a9459d734b167591fff, type: 2}
   buildingDistance: 0.4
+  woodGatherRate: 4
 --- !u!222 &222093191374368110
 CanvasRenderer:
   m_ObjectHideFlags: 1

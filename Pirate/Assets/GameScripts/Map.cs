@@ -14,6 +14,7 @@ public class Map : MonoBehaviour {
     public float buildingCutoff;
     public GameObject island;
     Vector2 offset;
+    
 
 	// Use this for initialization
 	void Start () {

@@ -19,6 +19,7 @@ public class Island : MonoBehaviour {
     List<Vector2> buildingSpots;
     public float buildingDistance;
     int buildingCapacity;
+    public float woodGatherRate;
 
     // Use this for initialization
     void Start()
@@ -87,11 +88,21 @@ public class Island : MonoBehaviour {
             lastBuild = Time.time;
             nextBuildWait = Random.Range(10, 20);
         }
-	}
+        text.text = (int)woodQuant + " wood";
+    }
+
+    private void FixedUpdate()
+    {
+        foreach (GameObject dock in docks)
+        {
+            float amt = Mathf.Min(woodQuant, Random.Range(.9f, 1.1f) * (10 + buildings.Count) * .0001f * woodGatherRate / (docks.Count + 5f));
+            dock.GetComponent<Dock>().AddWood(amt);
+            woodQuant -= amt;
+        }
+    }
 
     public void InRange()
     {
-        text.text = (int) woodQuant + " wood";
         transform.Find("Canvas").gameObject.SetActive(true);
     }
 

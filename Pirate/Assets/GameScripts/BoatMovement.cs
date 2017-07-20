@@ -102,6 +102,8 @@ public class BoatMovement : PlayerControllable {
                 }
                 GameObject newDock = Instantiate(dock, new Vector2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2), Quaternion.LookRotation(Vector3.forward, -(new Vector2((point2 - point1).y, -(point2 - point1).x))));
                 island.GetComponent<Island>().DockAdded(newDock);
+                GetComponentInParent<PlayerControl>().AddControllable(newDock.GetComponent<Dock>());
+                newDock.GetComponent<Dock>().SetPlayerControl(GetComponentInParent<PlayerControl>());
             }
 
             if (Input.GetButton("Fire"))

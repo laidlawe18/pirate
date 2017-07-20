@@ -5,11 +5,17 @@ using UnityEngine;
 public class PlayerControllable : MonoBehaviour {
 
 	public bool isActive;
+    PlayerControl pc;
 
 	// Use this for initialization
 	void Start () {
-		
+        pc = GetComponentInParent<PlayerControl>();
 	}
+
+    public void SetPlayerControl(PlayerControl playerControl)
+    {
+        pc = playerControl;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -17,7 +23,10 @@ public class PlayerControllable : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-        PlayerControl pc = GetComponentInParent<PlayerControl>();
+        if (pc == null)
+        {
+            pc = GetComponentInParent<PlayerControl>();
+        }
         pc.OnChildClick(this);
 	}
 
