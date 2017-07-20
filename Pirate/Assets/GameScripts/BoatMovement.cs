@@ -25,9 +25,10 @@ public class BoatMovement : PlayerControllable {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        oarsActive = false;
         if (isActive)
         {
-            oarsActive = false;
+            
             if (Mathf.Abs(Input.GetAxis("Vertical")) > .005 || Mathf.Abs(Input.GetAxis("Horizontal")) > .005)
             {
                 oarsActive = true;
