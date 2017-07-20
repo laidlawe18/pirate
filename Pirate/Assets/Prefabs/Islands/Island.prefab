@@ -231,6 +231,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba441c0738564e142951ca29ec93b449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingPrefabs:
+  - {fileID: 1720831863977810, guid: 3fb84bc4d9ea45b4ca31a9cf3ca543f0, type: 2}
+  - {fileID: 1424902684007528, guid: 68964a48eb2fb6a4da25469d4ff5afd5, type: 2}
+  - {fileID: 1731936460533778, guid: 309a6ca562cdae44283cffef0ac1a7dc, type: 2}
+  - {fileID: 1396560781652030, guid: e51e454a8342e0e4fa2711af488849f9, type: 2}
+  - {fileID: 1953113691418584, guid: 70446bc0f21199547bbc16c28213bab6, type: 2}
+  - {fileID: 1679577256329910, guid: 4bcf862609997934a843c45b9dc686cd, type: 2}
+  - {fileID: 1340210139846386, guid: 18bf67e61ebef834c9ef121e14b5675f, type: 2}
+  - {fileID: 1658115885229504, guid: afdb78cdd42c4a9459d734b167591fff, type: 2}
+  buildingDistance: 0.4
 --- !u!222 &222093191374368110
 CanvasRenderer:
   m_ObjectHideFlags: 1

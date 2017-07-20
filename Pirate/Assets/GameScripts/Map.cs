@@ -11,14 +11,16 @@ public class Map : MonoBehaviour {
     public int pixelSize;
     int[,] map;
     public int landCutoff = 3;
+    public float buildingCutoff;
     public GameObject island;
+    Vector2 offset;
 
 	// Use this for initialization
 	void Start () {
         Texture2D tex = new Texture2D(width, height);
         Texture2D colTex = new Texture2D(width, height);
         map = new int[width / pixelSize , height / pixelSize];
-        Vector2 offset = new Vector2(Random.Range(0, 100000), Random.Range(0, 100000));
+        offset = new Vector2(Random.Range(0, 100000), Random.Range(0, 100000));
 
         for (float i = 0; i < width; i++)
         {
@@ -61,4 +63,14 @@ public class Map : MonoBehaviour {
     void Update () {
 		
 	}
+
+    public float GetElevation(float x, float y)
+    {
+        return Mathf.PerlinNoise((x * 100 + width / 2) / scale + offset.x, (y * 100 + height / 2) / scale + offset.y);
+    }
+
+    public bool SafeForBuilding(float x, float y)
+    {
+        return GetElevation(x, y) < buildingCutoff / (float) colors.Length;
+    }
 }
