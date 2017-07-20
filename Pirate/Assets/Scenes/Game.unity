@@ -203,8 +203,8 @@ MonoBehaviour:
   - {r: 0.14901961, g: 0.5686275, b: 0.9176471, a: 1}
   - {r: 0.14901961, g: 0.5686275, b: 0.9176471, a: 1}
   - {r: 0.14901961, g: 0.5686275, b: 0.9176471, a: 1}
-  width: 2100
-  height: 1200
+  width: 4200
+  height: 2400
   pixelSize: 6
   landCutoff: 3
   buildingCutoff: 2.3
