@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Map : MonoBehaviour {
 
@@ -22,20 +23,33 @@ public class Map : MonoBehaviour {
         Texture2D colTex = new Texture2D(width, height);
         map = new int[width / pixelSize , height / pixelSize];
         offset = new Vector2(Random.Range(0, 100000), Random.Range(0, 100000));
-
+        GameObject minimap = GameObject.Find("Minimap");
+        int miniWidth = (int)minimap.GetComponent<RectTransform>().sizeDelta.x;
+        float miniScale = (float) miniWidth / width;
+        int miniHeight = (int)(miniScale * height);
+        minimap.GetComponent<RectTransform>().sizeDelta = new Vector2 (miniWidth, miniHeight);
+        minimap.transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(miniWidth + 30, miniHeight + 90);
+        Texture2D miniTex = new Texture2D(miniWidth, miniHeight);
+        int miniPixelSize = (int) (pixelSize / miniScale / 1.5);
+        
         for (float i = 0; i < width; i++)
         {
             for (float j = 0; j < height; j++)
             {
+                miniTex.SetPixel((int)(i*miniScale), (int)(j*miniScale), colors[(int)(Mathf.PerlinNoise((int)(i / miniPixelSize) * miniPixelSize / scale + offset.x, (int)(j / miniPixelSize) * miniPixelSize / scale + offset.y) * colors.Length) % colors.Length]);
                 tex.SetPixel((int) i, (int) j, colors[(int) (Mathf.PerlinNoise((int) (i / pixelSize) * pixelSize / scale + offset.x, (int)(j / pixelSize) * pixelSize / scale + offset.y) * colors.Length) % colors.Length]);
                 colTex.SetPixel((int)i, (int)j, (int)(Mathf.PerlinNoise((int)(i / pixelSize) * pixelSize / scale + offset.x, (int)(j / pixelSize) * pixelSize / scale + offset.y) * colors.Length) % colors.Length < landCutoff ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0));
                 map[(int) i / pixelSize, (int) j / pixelSize] = (int) (Mathf.PerlinNoise((int)(i / pixelSize) * pixelSize / scale + offset.x, (int)(j / pixelSize) * pixelSize / scale + offset.y) * colors.Length) % colors.Length;
             }
         }
-        
+
+
+        miniTex.Apply();
         tex.Apply();
         colTex.Apply();
         Sprite sprite = Sprite.Create(colTex, new Rect(0, 0, width, height), new Vector2(.5f, .5f));
+        Sprite miniSprite = Sprite.Create(miniTex, new Rect(0, 0, miniWidth, miniHeight), new Vector2(.5f, .5f));
+        minimap.GetComponent<Image>().sprite = miniSprite;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.sprite = sprite;
 
