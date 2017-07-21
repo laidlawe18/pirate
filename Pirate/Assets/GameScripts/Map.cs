@@ -29,6 +29,17 @@ public class Map : MonoBehaviour {
         int miniHeight = (int)(miniScale * height);
         minimap.GetComponent<RectTransform>().sizeDelta = new Vector2 (miniWidth, miniHeight);
         minimap.transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(miniWidth + 30, miniHeight + 75);
+        minimap.transform.parent.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(miniWidth / 2 + 25, miniHeight / 2 + 50);
+
+        Camera minimapCamera = GameObject.Find("Minimap Camera").GetComponent<Camera>();
+
+        minimapCamera.aspect = (float)width / height;
+        minimapCamera.orthographicSize = (float) height / 200f;
+        minimapCamera.targetTexture.width = miniWidth;
+        minimapCamera.targetTexture.height = miniHeight;
+        GameObject minimapFromCamera = GameObject.Find("Minimap From Camera");
+        minimapFromCamera.GetComponent<RectTransform>().sizeDelta = new Vector2(miniWidth, miniHeight);
+
         Texture2D miniTex = new Texture2D(miniWidth, miniHeight);
         int miniPixelSize = (int) (pixelSize / miniScale / 1.5);
 
