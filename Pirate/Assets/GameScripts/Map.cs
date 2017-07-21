@@ -28,9 +28,11 @@ public class Map : MonoBehaviour {
         float miniScale = (float) miniWidth / width;
         int miniHeight = (int)(miniScale * height);
         minimap.GetComponent<RectTransform>().sizeDelta = new Vector2 (miniWidth, miniHeight);
-        minimap.transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(miniWidth + 30, miniHeight + 90);
+        minimap.transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(miniWidth + 30, miniHeight + 75);
         Texture2D miniTex = new Texture2D(miniWidth, miniHeight);
         int miniPixelSize = (int) (pixelSize / miniScale / 1.5);
+
+        tex.filterMode = FilterMode.Point;
         
         for (float i = 0; i < width; i++)
         {
