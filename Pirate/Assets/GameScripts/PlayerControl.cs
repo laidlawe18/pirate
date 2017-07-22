@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour {
 
@@ -14,7 +15,7 @@ public class PlayerControl : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
         if (controllables.Count == 0)
         {
             currActive = -1;
@@ -39,9 +40,20 @@ public class PlayerControl : MonoBehaviour {
                 controllables[currActive].Activate();
             }
         }
-    }
+        float woodTot = 0;
+        foreach (PlayerControllable pc in controllables)
+        {
+            if (pc.GetType() == typeof(Dock))
+            {
+                woodTot += ((Dock)pc).GetWood();
+            }
+        }
 
-	public void OnChildClick (PlayerControllable pc) {
+        GetComponentInChildren<Text>().text = ((int)woodTot).ToString();
+    }
+    
+
+    public void OnChildClick (PlayerControllable pc) {
         
 
         for (int i = 0; i < controllables.Count; i++)

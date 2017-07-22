@@ -37,4 +37,9 @@ public class Dock : PlayerControllable {
     {
         wood += amt;
     }
+
+    public float GetWood()
+    {
+        return wood;
+    }
 }

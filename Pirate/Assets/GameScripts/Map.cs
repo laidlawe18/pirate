@@ -7,6 +7,7 @@ public class Map : MonoBehaviour {
 
     public float scale;
     public Color[] colors;
+    public Color[] minimapColors;
     public int width;
     public int height;
     public int pixelSize;
@@ -28,8 +29,8 @@ public class Map : MonoBehaviour {
         float miniScale = (float) miniWidth / width;
         int miniHeight = (int)(miniScale * height);
         minimap.GetComponent<RectTransform>().sizeDelta = new Vector2 (miniWidth, miniHeight);
-        minimap.transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(miniWidth + 30, miniHeight + 75);
-        minimap.transform.parent.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(miniWidth / 2 + 25, miniHeight / 2 + 50);
+        minimap.transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(miniWidth + 30, miniHeight + 30);
+        minimap.transform.parent.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(miniWidth / 2 + 25, miniHeight / 2 + 25);
 
         Camera minimapCamera = GameObject.Find("Minimap Camera").GetComponent<Camera>();
 
@@ -49,7 +50,7 @@ public class Map : MonoBehaviour {
         {
             for (float j = 0; j < height; j++)
             {
-                miniTex.SetPixel((int)(i*miniScale), (int)(j*miniScale), colors[(int)(Mathf.PerlinNoise((int)(i / miniPixelSize) * miniPixelSize / scale + offset.x, (int)(j / miniPixelSize) * miniPixelSize / scale + offset.y) * colors.Length) % colors.Length]);
+                miniTex.SetPixel((int)(i*miniScale), (int)(j*miniScale), minimapColors[(int)(Mathf.PerlinNoise((int)(i / miniPixelSize) * miniPixelSize / scale + offset.x, (int)(j / miniPixelSize) * miniPixelSize / scale + offset.y) * minimapColors.Length) % minimapColors.Length]);
                 tex.SetPixel((int) i, (int) j, colors[(int) (Mathf.PerlinNoise((int) (i / pixelSize) * pixelSize / scale + offset.x, (int)(j / pixelSize) * pixelSize / scale + offset.y) * colors.Length) % colors.Length]);
                 colTex.SetPixel((int)i, (int)j, (int)(Mathf.PerlinNoise((int)(i / pixelSize) * pixelSize / scale + offset.x, (int)(j / pixelSize) * pixelSize / scale + offset.y) * colors.Length) % colors.Length < landCutoff ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0));
                 map[(int) i / pixelSize, (int) j / pixelSize] = (int) (Mathf.PerlinNoise((int)(i / pixelSize) * pixelSize / scale + offset.x, (int)(j / pixelSize) * pixelSize / scale + offset.y) * colors.Length) % colors.Length;
