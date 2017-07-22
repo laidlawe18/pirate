@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoatMovement : PlayerControllable {
 
@@ -11,6 +12,7 @@ public class BoatMovement : PlayerControllable {
     Queue<GameObject> clickPoints;
     public GameObject clickPoint;
     bool oarsActive;
+    
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -106,6 +108,7 @@ public class BoatMovement : PlayerControllable {
                     }
                 }
                 GameObject newDock = Instantiate(dock, new Vector2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2), Quaternion.LookRotation(Vector3.forward, -(new Vector2((point2 - point1).y, -(point2 - point1).x))));
+                newDock.transform.parent = transform.parent;
                 island.GetComponent<Island>().DockAdded(newDock);
                 GetComponentInParent<PlayerControl>().AddControllable(newDock.GetComponent<Dock>());
                 newDock.GetComponent<Dock>().SetPlayerControl(GetComponentInParent<PlayerControl>());
@@ -124,9 +127,9 @@ public class BoatMovement : PlayerControllable {
         }
     }
 
-    public override void Activate()
+    public override void Activate(PlayerControl pc)
     {
-        base.Activate();
+        base.Activate(pc);
         GetComponentInChildren<Select>().Activate();
         foreach (GameObject go in clickPoints)
         {
@@ -134,9 +137,9 @@ public class BoatMovement : PlayerControllable {
         }
     }
 
-    public override void Deactivate()
+    public override void Deactivate(PlayerControl pc)
     {
-        base.Deactivate();
+        base.Deactivate(pc);
         foreach (GameObject go in clickPoints)
         {
             go.SetActive(false);
@@ -164,5 +167,11 @@ public class BoatMovement : PlayerControllable {
     public bool OarsActive()
     {
         return oarsActive;
+    }
+
+    public override void CreateInfo(GameObject panel)
+    {
+        GameObject newTitle = Instantiate(title, panel.transform);
+        newTitle.GetComponent<Text>().text = "Boat";
     }
 }

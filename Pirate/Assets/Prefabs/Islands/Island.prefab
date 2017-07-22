@@ -231,6 +231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba441c0738564e142951ca29ec93b449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
+  title: {fileID: 1462896147128028, guid: a13bc111cc1667c4bb1b3780c68998dc, type: 2}
+  woodNum: {fileID: 1642417480430848, guid: bc75da4904354f6439a60ed40d12978a, type: 2}
   buildingPrefabs:
   - {fileID: 1720831863977810, guid: 3fb84bc4d9ea45b4ca31a9cf3ca543f0, type: 2}
   - {fileID: 1424902684007528, guid: 68964a48eb2fb6a4da25469d4ff5afd5, type: 2}

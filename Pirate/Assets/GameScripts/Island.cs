@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class Island : MonoBehaviour {
-    Text text;
+public class Island : PlayerControllable {
     float woodMult;
     float woodQuant;
     public GameObject[] buildingPrefabs;
@@ -24,9 +23,7 @@ public class Island : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        transform.Find("Canvas").gameObject.SetActive(true);
-        text = GetComponentInChildren<Text>();
-        transform.Find("Canvas").gameObject.SetActive(false);
+        gameObject.transform.parent.gameObject.GetComponentInChildren<PlayerControl>().AddControllable(this);
         docks = new List<GameObject>();
         buildings = new List<GameObject>();
         buildingSpots = new List<Vector2>();
@@ -88,7 +85,6 @@ public class Island : MonoBehaviour {
             lastBuild = Time.time;
             nextBuildWait = Random.Range(10, 20);
         }
-        text.text = (int)woodQuant + " wood";
     }
 
     private void FixedUpdate()
@@ -103,12 +99,12 @@ public class Island : MonoBehaviour {
 
     public void InRange()
     {
-        transform.Find("Canvas").gameObject.SetActive(true);
+
     }
 
     public void OutOfRange()
     {
-        transform.Find("Canvas").gameObject.SetActive(false);
+
     }
 
     private float Area(Vector2[] pts)
@@ -127,5 +123,18 @@ public class Island : MonoBehaviour {
         docks.Add(dock);
         lastBuild = Time.time;
         buildingSpots.Sort((x, y) => Vector2.Distance(x, docks[0].transform.position).CompareTo(Vector2.Distance(y, docks[0].transform.position)));
+    }
+
+    public override void CreateInfo(GameObject panel)
+    {
+        GameObject newTitle = Instantiate(title, panel.transform);
+        newTitle.GetComponent<Text>().text = "Island";
+        GameObject newWood = Instantiate(woodNum, panel.transform);
+        newWood.GetComponentInChildren<Text>().text = (int)woodQuant + "";
+    }
+
+    public override void UpdateInfo(GameObject panel)
+    {
+        panel.transform.Find("Wood Panel(Clone)").GetComponentInChildren<Text>().text = (int)woodQuant + "";
     }
 }

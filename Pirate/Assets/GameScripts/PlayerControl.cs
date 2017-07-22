@@ -16,28 +16,32 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        GameObject panel = transform.Find("Canvas/Info Panel").gameObject;
         if (controllables.Count == 0)
         {
             currActive = -1;
         }
         else
         {
+            
             if (Input.GetButtonDown("Switch") && Input.GetAxis("Switch") > 0)
             {
-                controllables[currActive].Deactivate();
+                controllables[currActive].Deactivate(this);
                 currActive += 1;
                 currActive %= controllables.Count;
-                controllables[currActive].Activate();
+                controllables[currActive].Activate(this);
+                
             }
             if (Input.GetButtonDown("Switch") && Input.GetAxis("Switch") < 0)
             {
-                controllables[currActive].Deactivate();
+                controllables[currActive].Deactivate(this);
                 currActive -= 1;
                 if (currActive < 0)
                 {
                     currActive = controllables.Count - 1;
                 }
-                controllables[currActive].Activate();
+                controllables[currActive].Activate(this);
+                
             }
         }
         float woodTot = 0;
@@ -50,6 +54,11 @@ public class PlayerControl : MonoBehaviour {
         }
 
         GetComponentInChildren<Text>().text = ((int)woodTot).ToString();
+
+
+        panel = transform.Find("Canvas/Info Panel").gameObject;
+        controllables[currActive].UpdateInfo(panel);
+        
     }
     
 
@@ -60,9 +69,11 @@ public class PlayerControl : MonoBehaviour {
         {
             if (controllables[i].Equals(pc))
             {
-                controllables[currActive].Deactivate(); 
+                controllables[currActive].Deactivate(this); 
                 currActive = i;
-                controllables[currActive].Activate();
+                controllables[currActive].Activate(this);
+                GameObject panel = transform.Find("Canvas/Info Panel").gameObject;
+                
             }
         }
 	}
@@ -71,4 +82,10 @@ public class PlayerControl : MonoBehaviour {
     {
         controllables.Add(pc);
     }
+
+    public void useAbility(string name)
+    {
+        controllables[currActive].useAbility(name);
+    }
+
 }

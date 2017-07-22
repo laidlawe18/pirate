@@ -82,6 +82,7 @@ public class Map : MonoBehaviour {
             }
             newIsland.GetComponent<PolygonCollider2D>().SetPath(0, vecs);
             newIsland.GetComponent<Island>().SetResourceMult(Mathf.PerlinNoise(pos.x * 100 / scale + offset.x, pos.y * 100 / scale + offset.y));
+            newIsland.GetComponent<Island>().SetPlayerControl(GetComponentInChildren<PlayerControl>());
         }
         Destroy(pc);
         sprite = Sprite.Create(tex, new Rect(0, 0, width, height), new Vector2(.5f, .5f));

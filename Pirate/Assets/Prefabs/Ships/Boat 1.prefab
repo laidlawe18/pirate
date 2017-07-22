@@ -199,8 +199,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4732549990050202}
-  - {fileID: 4153657261009078}
   - {fileID: 4189465964754532}
+  - {fileID: 4153657261009078}
   - {fileID: 4798764769480328}
   - {fileID: 4368312303382134}
   - {fileID: 4829922773478166}
@@ -221,7 +221,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4061563182529636}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4189465964754532
 Transform:
@@ -234,7 +234,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4061563182529636}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4292357150107374
 Transform:
@@ -619,6 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
+  title: {fileID: 1462896147128028, guid: a13bc111cc1667c4bb1b3780c68998dc, type: 2}
   dock: {fileID: 1260779234714598, guid: b6e529a0369bfff43b99445e2be41f06, type: 2}
   clickPoint: {fileID: 1172764887396462, guid: 0de3817957de33b4db78498b32909872, type: 2}
 --- !u!212 &212007540249808378
