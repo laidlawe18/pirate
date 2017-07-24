@@ -66,7 +66,7 @@ public class Dock : PlayerControllable {
     {
         if(wood >= .5f)
         {
-            GameObject newBoat = Instantiate(boat, transform.position + transform.rotation * new Vector3(0, -0.5f, 0), transform.rotation, transform.parent);
+            GameObject newBoat = Instantiate(boat, transform.position + transform.rotation * new Vector3(0, -0.8f, 0), Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 180)), transform.parent);
             GetComponentInParent<PlayerControl>().AddControllable(newBoat.GetComponent<BoatMovement>());
         }
     }

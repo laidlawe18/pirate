@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class PlayerControl : MonoBehaviour {
 
     List<PlayerControllable> controllables;
+    public GameObject uiCanvas;
     public int currActive;
 
 	// Use this for initialization
 	void Start () {
         controllables = new List<PlayerControllable>(GetComponentsInChildren<PlayerControllable>());
-        currActive = 0;
+        currActive = -1;
+        //controllables[currActive].CreateInfo(uiCanvas.transform.Find("Info Panel").gameObject);
 	}
 	
 	// Update is called once per frame
@@ -55,9 +57,12 @@ public class PlayerControl : MonoBehaviour {
 
         GetComponentInChildren<Text>().text = ((int)woodTot).ToString();
 
-
-        panel = transform.Find("Canvas/Info Panel").gameObject;
-        controllables[currActive].UpdateInfo(panel);
+        if (currActive >= 0)
+        {
+            panel = uiCanvas.transform.Find("Info Panel").gameObject;
+            controllables[currActive].UpdateInfo(panel);
+        }
+        
         
     }
     
@@ -69,11 +74,15 @@ public class PlayerControl : MonoBehaviour {
         {
             if (controllables[i].Equals(pc))
             {
-                controllables[currActive].Deactivate(this); 
+                if (currActive != -1)
+                {
+                    controllables[currActive].Deactivate(this);
+                }
+                
                 currActive = i;
                 controllables[currActive].Activate(this);
-                GameObject panel = transform.Find("Canvas/Info Panel").gameObject;
-                
+                GameObject panel = uiCanvas.transform.Find("Info Panel").gameObject;
+                controllables[i].CreateInfo(panel);
             }
         }
 	}

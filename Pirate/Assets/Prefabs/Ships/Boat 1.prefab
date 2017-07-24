@@ -194,8 +194,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1072268924226698}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.711, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4732549990050202}
@@ -386,11 +386,19 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.19355515, y: 0.18183482}
-      - {x: 0.012470681, y: 0.54935014}
-      - {x: -0.17989913, y: 0.18282062}
-      - {x: -0.17651254, y: -0.36016607}
-      - {x: 0.19561236, y: -0.35892218}
+    - - {x: 0.060000002, y: 0.30833334}
+      - {x: 0.028333334, y: 0.40333334}
+      - {x: 0, y: 0.40333334}
+      - {x: -0.0033333334, y: 0.4}
+      - {x: -0.086666666, y: 0.24333334}
+      - {x: -0.11, y: 0.18666667}
+      - {x: -0.11, y: -0.18666667}
+      - {x: -0.086666666, y: -0.21666667}
+      - {x: -0.053333335, y: -0.24333334}
+      - {x: 0.08833334, y: -0.24333334}
+      - {x: 0.13666667, y: -0.19}
+      - {x: 0.13666667, y: 0.19833334}
+      - {x: 0.115, y: 0.255}
 --- !u!95 &95159012295289664
 Animator:
   serializedVersion: 3
@@ -620,6 +628,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 0
   title: {fileID: 1462896147128028, guid: a13bc111cc1667c4bb1b3780c68998dc, type: 2}
+  woodNum: {fileID: 1642417480430848, guid: bc75da4904354f6439a60ed40d12978a, type: 2}
+  abilities:
+  - {fileID: 1470576022876034, guid: 4cb9b6c9ed7ca1a4cb4fe95529909868, type: 2}
+  - {fileID: 1711187992824788, guid: 3b3a4f3fd9d0fec48a0b206bec1afa85, type: 2}
   dock: {fileID: 1260779234714598, guid: b6e529a0369bfff43b99445e2be41f06, type: 2}
   clickPoint: {fileID: 1172764887396462, guid: 0de3817957de33b4db78498b32909872, type: 2}
 --- !u!212 &212007540249808378
