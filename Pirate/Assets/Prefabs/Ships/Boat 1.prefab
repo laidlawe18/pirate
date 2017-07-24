@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 60335191582969260}
   - component: {fileID: 50139682117334282}
   - component: {fileID: 114910796458601808}
+  - component: {fileID: 114952039649160076}
+  - component: {fileID: 114297668476577888}
   m_Layer: 0
   m_Name: Boat 1
   m_TagString: Untagged
@@ -551,6 +553,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ead153339613b46b88be659b8bc07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114297668476577888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072268924226698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114377591544455332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,14 +649,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4008f40dce4100445b2cc2e24b190062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
-  title: {fileID: 1462896147128028, guid: a13bc111cc1667c4bb1b3780c68998dc, type: 2}
-  woodNum: {fileID: 1642417480430848, guid: bc75da4904354f6439a60ed40d12978a, type: 2}
-  abilities:
-  - {fileID: 1470576022876034, guid: 4cb9b6c9ed7ca1a4cb4fe95529909868, type: 2}
-  - {fileID: 1711187992824788, guid: 3b3a4f3fd9d0fec48a0b206bec1afa85, type: 2}
+  ownerID: 0
+  selected: 0
   dock: {fileID: 1260779234714598, guid: b6e529a0369bfff43b99445e2be41f06, type: 2}
   clickPoint: {fileID: 1172764887396462, guid: 0de3817957de33b4db78498b32909872, type: 2}
+--- !u!114 &114952039649160076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072268924226698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 20
+    i1: 155
+    i2: 100
+    i3: 92
+    i4: 188
+    i5: 77
+    i6: 26
+    i7: 116
+    i8: 184
+    i9: 21
+    i10: 102
+    i11: 4
+    i12: 19
+    i13: 43
+    i14: 79
+    i15: 126
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!212 &212007540249808378
 SpriteRenderer:
   m_ObjectHideFlags: 1

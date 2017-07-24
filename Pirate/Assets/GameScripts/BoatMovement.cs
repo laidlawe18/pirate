@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class BoatMovement : PlayerControllable {
+public class BoatMovement : Selectable {
 
 	Rigidbody2D rb2d;
     Cannon[] cannons;
@@ -15,9 +16,11 @@ public class BoatMovement : PlayerControllable {
     
 	// Use this for initialization
 	void Start () {
+        selected = false;
+        GameManager.instance.AddSelectable(this);
+
 		rb2d = GetComponent<Rigidbody2D> ();
         cannons = GetComponentsInChildren<Cannon>();
-        isActive = false;
         island = null;
         clickPoints = new Queue<GameObject>();
         oarsActive = false;
@@ -28,7 +31,7 @@ public class BoatMovement : PlayerControllable {
 	// Update is called once per frame
 	void FixedUpdate () {
         oarsActive = false;
-        if (isActive)
+        if (selected && ownerID == localPlayer.playerID)
         {
             
             if (Mathf.Abs(Input.GetAxis("Vertical")) > .005 || Mathf.Abs(Input.GetAxis("Horizontal")) > .005)
@@ -73,7 +76,7 @@ public class BoatMovement : PlayerControllable {
 
     void Update()
     {
-        if (isActive)
+        if (selected)
         {
             if (Input.GetButtonDown("Click"))
             {
@@ -127,25 +130,6 @@ public class BoatMovement : PlayerControllable {
         }
     }
 
-    public override void Activate(PlayerControl pc)
-    {
-        base.Activate(pc);
-        GetComponentInChildren<Select>().Activate();
-        foreach (GameObject go in clickPoints)
-        {
-            go.SetActive(true);
-        }
-    }
-
-    public override void Deactivate(PlayerControl pc)
-    {
-        base.Deactivate(pc);
-        foreach (GameObject go in clickPoints)
-        {
-            go.SetActive(false);
-        }
-    }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<Island>() != null)
@@ -169,9 +153,9 @@ public class BoatMovement : PlayerControllable {
         return oarsActive;
     }
 
-    public override void CreateInfo(GameObject panel)
+    /*public override void CreateInfo(GameObject panel)
     {
         GameObject newTitle = Instantiate(title, panel.transform);
         newTitle.GetComponent<Text>().text = "Boat";
-    }
+    }*/
 }

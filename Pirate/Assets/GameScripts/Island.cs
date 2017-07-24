@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class Island : PlayerControllable {
+public class Island : Selectable {
     float woodMult;
     float woodQuant;
     public GameObject[] buildingPrefabs;
@@ -23,7 +23,6 @@ public class Island : PlayerControllable {
     // Use this for initialization
     void Start()
     {
-        gameObject.transform.parent.gameObject.GetComponentInChildren<PlayerControl>().AddControllable(this);
         docks = new List<GameObject>();
         buildings = new List<GameObject>();
         buildingSpots = new List<Vector2>();
@@ -125,7 +124,7 @@ public class Island : PlayerControllable {
         buildingSpots.Sort((x, y) => Vector2.Distance(x, docks[0].transform.position).CompareTo(Vector2.Distance(y, docks[0].transform.position)));
     }
 
-    public override void CreateInfo(GameObject panel)
+    /*public override void CreateInfo(GameObject panel)
     {
         GameObject newTitle = Instantiate(title, panel.transform);
         newTitle.GetComponent<Text>().text = "Island";
@@ -136,5 +135,5 @@ public class Island : PlayerControllable {
     public override void UpdateInfo(GameObject panel)
     {
         panel.transform.Find("Wood Panel(Clone)").GetComponentInChildren<Text>().text = (int)woodQuant + "";
-    }
+    }*/
 }

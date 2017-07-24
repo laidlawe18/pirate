@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class Map : MonoBehaviour {
+public class Map : NetworkBehaviour {
 
     public float scale;
     public Color[] colors;
@@ -15,6 +16,8 @@ public class Map : MonoBehaviour {
     public int landCutoff = 3;
     public float buildingCutoff;
     public GameObject island;
+
+    [SyncVar]
     Vector2 offset;
     
 
@@ -23,8 +26,13 @@ public class Map : MonoBehaviour {
         Texture2D tex = new Texture2D(width, height);
         Texture2D colTex = new Texture2D(width, height);
         map = new int[width / pixelSize , height / pixelSize];
-        offset = new Vector2(Random.Range(0, 100000), Random.Range(0, 100000));
-        GameObject minimap = GameObject.Find("Minimap");
+        if (isServer)
+        {
+            offset = new Vector2(Random.Range(0, 100000), Random.Range(0, 100000));
+        }
+
+        
+        /*GameObject minimap = GameObject.Find("Minimap");
         int miniWidth = (int)minimap.GetComponent<RectTransform>().sizeDelta.x;
         float miniScale = (float) miniWidth / width;
         int miniHeight = (int)(miniScale * height);
@@ -42,7 +50,7 @@ public class Map : MonoBehaviour {
         minimapFromCamera.GetComponent<RectTransform>().sizeDelta = new Vector2(miniWidth, miniHeight);
 
         Texture2D miniTex = new Texture2D(miniWidth, miniHeight);
-        int miniPixelSize = (int) (pixelSize / miniScale / 1.5);
+        int miniPixelSize = (int) (pixelSize / miniScale / 1.5);*/
 
         tex.filterMode = FilterMode.Point;
         
@@ -50,7 +58,7 @@ public class Map : MonoBehaviour {
         {
             for (float j = 0; j < height; j++)
             {
-                miniTex.SetPixel((int)(i*miniScale), (int)(j*miniScale), minimapColors[(int)(Mathf.PerlinNoise((int)(i / miniPixelSize) * miniPixelSize / scale + offset.x, (int)(j / miniPixelSize) * miniPixelSize / scale + offset.y) * minimapColors.Length) % minimapColors.Length]);
+                //miniTex.SetPixel((int)(i*miniScale), (int)(j*miniScale), minimapColors[(int)(Mathf.PerlinNoise((int)(i / miniPixelSize) * miniPixelSize / scale + offset.x, (int)(j / miniPixelSize) * miniPixelSize / scale + offset.y) * minimapColors.Length) % minimapColors.Length]);
                 tex.SetPixel((int) i, (int) j, colors[(int) (Mathf.PerlinNoise((int) (i / pixelSize) * pixelSize / scale + offset.x, (int)(j / pixelSize) * pixelSize / scale + offset.y) * colors.Length) % colors.Length]);
                 colTex.SetPixel((int)i, (int)j, (int)(Mathf.PerlinNoise((int)(i / pixelSize) * pixelSize / scale + offset.x, (int)(j / pixelSize) * pixelSize / scale + offset.y) * colors.Length) % colors.Length < landCutoff ? new Color(1, 1, 1, 1) : new Color(1, 1, 1, 0));
                 map[(int) i / pixelSize, (int) j / pixelSize] = (int) (Mathf.PerlinNoise((int)(i / pixelSize) * pixelSize / scale + offset.x, (int)(j / pixelSize) * pixelSize / scale + offset.y) * colors.Length) % colors.Length;
@@ -58,12 +66,12 @@ public class Map : MonoBehaviour {
         }
 
 
-        miniTex.Apply();
+        //miniTex.Apply();
         tex.Apply();
         colTex.Apply();
         Sprite sprite = Sprite.Create(colTex, new Rect(0, 0, width, height), new Vector2(.5f, .5f));
-        Sprite miniSprite = Sprite.Create(miniTex, new Rect(0, 0, miniWidth, miniHeight), new Vector2(.5f, .5f));
-        minimap.GetComponent<Image>().sprite = miniSprite;
+        //Sprite miniSprite = Sprite.Create(miniTex, new Rect(0, 0, miniWidth, miniHeight), new Vector2(.5f, .5f));
+        //minimap.GetComponent<Image>().sprite = miniSprite;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.sprite = sprite;
 
@@ -82,7 +90,6 @@ public class Map : MonoBehaviour {
             }
             newIsland.GetComponent<PolygonCollider2D>().SetPath(0, vecs);
             newIsland.GetComponent<Island>().SetResourceMult(Mathf.PerlinNoise(pos.x * 100 / scale + offset.x, pos.y * 100 / scale + offset.y));
-            newIsland.GetComponent<Island>().SetPlayerControl(GetComponentInChildren<PlayerControl>());
         }
         Destroy(pc);
         sprite = Sprite.Create(tex, new Rect(0, 0, width, height), new Vector2(.5f, .5f));
