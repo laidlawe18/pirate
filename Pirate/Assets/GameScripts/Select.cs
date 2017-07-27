@@ -18,7 +18,7 @@ public class Select : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (GetComponentInParent<PlayerControllable>().isActive)
+        if (GetComponentInParent<Selectable>().selected)
         {
             if (anim.GetInteger("State") == 1 && Time.time - selectedTime > 2)
             {

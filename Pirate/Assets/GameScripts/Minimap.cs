@@ -5,44 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class Minimap : MonoBehaviour, IPointerDownHandler {
+public class Minimap : MonoBehaviour {
 
-    RectTransform rt;
-    Camera camera;
-
-	// Use this for initialization
-	void Start () {
-        Camera camera = GameObject.Find("Minimap Camera").GetComponent<Camera>();
-        RectTransform rt = GetComponent<RectTransform>();
-
-    }
-    
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
-
-    public void OnPointerDown(PointerEventData eventData)
+    public void InitUI()
     {
-        if (rt == null)
-        {
-            rt = GetComponent<RectTransform>();
-        }
-        if (camera == null)
-        {
-            camera = GameObject.Find("Minimap Camera").GetComponent<Camera>();
-        }
-        Vector2 rectPos = new Vector2(0, 0);
-        
-        
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rt, Input.mousePosition, null, out rectPos);
-        rectPos += rt.sizeDelta / 2;
+        Sprite sprite = GameManager.instance.map.GetMinimapSprite((int)GetComponent<RectTransform>().sizeDelta.x);
+        GetComponent<RectTransform>().sizeDelta = new Vector2(sprite.texture.width, sprite.texture.height);
+        transform.parent.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(sprite.texture.width + 30, sprite.texture.height + 30);
+        transform.parent.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(sprite.texture.width / 2 + 25, sprite.texture.height / 2 + 25);
 
-        Vector2 viewportPos = new Vector2(rectPos.x / rt.sizeDelta.x, rectPos.y / rt.sizeDelta.y);
-
-        Vector3 worldPos = camera.ViewportToWorldPoint(viewportPos);
-        worldPos.z = -10;
-        Camera.main.transform.position = worldPos;
+        GetComponent<Image>().sprite = sprite;
     }
+
 }

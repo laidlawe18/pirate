@@ -21,11 +21,11 @@ public class Ability : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        useAbility();
+        UseAbility();
     }
 
-    public void useAbility ()
+    public void UseAbility ()
     {
-        transform.parent.parent.gameObject.GetComponent<PlayerControl>().useAbility(abilityName);
+        GameManager.instance.localPlayer.UseAbility(abilityName);
     }
 }

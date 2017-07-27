@@ -2,59 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class Dock : PlayerControllable {
+public class Dock : Selectable {
 
     public GameObject boat;
-    float wood;
+
+    [SyncVar]
+    public Resources res;
+
+    [SyncVar]
+    public int islandID;
 
 	// Use this for initialization
-	void Start () {
-        wood = 0;
+	new void Start () {
+        base.Start();
+        res = new Resources();
+        GameManager.instance.map.GetIslandByID(islandID).DockAdded(this);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (isActive)
-        {
 
-        }
 	}
+    
 
-    public override void Activate(PlayerControl pc)
+    public override void CreateInfo()
     {
-        base.Activate(pc);
+        InfoPanel infoPanel = GameManager.instance.ui.infoPanel;
+        infoPanel.Clear();
+        infoPanel.AddTitle("Dock");
+        infoPanel.AddResources(res);
     }
 
-    public override void Deactivate(PlayerControl pc)
+    public override void UpdateInfo()
     {
-        base.Deactivate(pc);
+        InfoPanel infoPanel = GameManager.instance.ui.infoPanel;
+        infoPanel.UpdateResources(res);
     }
 
-    public void AddWood(float amt)
-    {
-        wood += amt;
-    }
-
-    public float GetWood()
-    {
-        return wood;
-    }
-
-    public override void CreateInfo(GameObject panel)
-    {
-        GameObject newTitle = Instantiate(title, panel.transform);
-        newTitle.GetComponent<Text>().text = "Dock";
-        GameObject newWood = Instantiate(woodNum, panel.transform);
-        newWood.GetComponentInChildren<Text>().text = (int)wood + "";
-    }
-
-    public override void UpdateInfo(GameObject panel)
-    {
-        panel.transform.Find("Wood Panel(Clone)").GetComponentInChildren<Text>().text = (int)wood + "";
-    }
-
-    public override void useAbility(string name)
+    public override void UseAbility(string name)
     {
         if (name.Equals("Create Boat"))
         {
@@ -64,10 +51,10 @@ public class Dock : PlayerControllable {
 
     public void CreateBoat()
     {
-        if(wood >= .5f)
+        if(res.wood >= 5f)
         {
-            GameObject newBoat = Instantiate(boat, transform.position + transform.rotation * new Vector3(0, -0.8f, 0), Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 180)), transform.parent);
-            //GetComponentInParent<PlayerControl>().AddControllable(newBoat.GetComponent<BoatMovement>());
+            res -= new Resources(5f, 0);
+            localPlayer.CmdMakeBoat(transform.position + transform.rotation * new Vector3(0, -0.8f, 0), Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 180)));
         }
     }
 }

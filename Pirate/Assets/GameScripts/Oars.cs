@@ -18,7 +18,7 @@ public class Oars : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponentInParent<BoatMovement>().OarsActive())
+        if (GetComponentInParent<Boat>().OarsActive())
         {
             anim.SetInteger("State", 2);
         } else

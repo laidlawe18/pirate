@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Island : Selectable {
     float woodMult;
-    float woodQuant;
+
+    [SyncVar]
+    Resources res;
+
     public GameObject[] buildingPrefabs;
 
-    List<GameObject> docks;
+    List<Dock> docks;
     List<GameObject> buildings;
     float lastBuild = 0;
     float nextBuildWait = 10;
@@ -20,13 +24,18 @@ public class Island : Selectable {
     int buildingCapacity;
     public float woodGatherRate;
 
+    [SyncVar]
+    public int islandID;
+
     // Use this for initialization
-    void Start()
+    new void Start()
     {
-        docks = new List<GameObject>();
+        GetComponent<PolygonCollider2D>().SetPath(0, GameManager.instance.map.SetIslandByID(islandID, this));
+        base.Start();
+        docks = new List<Dock>();
         buildings = new List<GameObject>();
         buildingSpots = new List<Vector2>();
-
+        
         float minX = 1000000;
         float minY = 1000000;
         float maxX = -1000000;
@@ -58,7 +67,7 @@ public class Island : Selectable {
         {
             for (float j = bottomLeft.y; j < topRight.y; j += buildingDistance)
             {
-                if (GetComponentInParent<Map>().SafeForBuilding(i, j))
+                if (GameManager.instance.map.SafeForBuilding(i, j))
                 {
                     buildingSpots.Add(new Vector2(i + Random.Range(buildingDistance / -4, buildingDistance / 4), j + Random.Range(buildingDistance / -4, buildingDistance / 4)));
                 }
@@ -70,7 +79,8 @@ public class Island : Selectable {
     public void SetResourceMult(float wood)
     {
         woodMult = wood;
-        woodQuant = Area(GetComponent<PolygonCollider2D>().GetPath(0)) * woodMult * 50;
+        res = new Resources(Area(GetComponent<PolygonCollider2D>().GetPath(0)) * woodMult * 50, 0);
+        print(res);
     }
 
     // Update is called once per frame
@@ -88,11 +98,14 @@ public class Island : Selectable {
 
     private void FixedUpdate()
     {
-        foreach (GameObject dock in docks)
+        foreach (Dock dock in docks)
         {
-            float amt = Mathf.Min(woodQuant, Random.Range(.9f, 1.1f) * (10 + buildings.Count) * .0001f * woodGatherRate / (docks.Count + 5f));
-            dock.GetComponent<Dock>().AddWood(amt);
-            woodQuant -= amt;
+            if (dock.isServer)
+            {
+                float amt = Mathf.Min(res.wood, Random.Range(.9f, 1.1f) * (10 + buildings.Count) * .0001f * woodGatherRate / (docks.Count + 5f));
+                dock.res += new Resources(amt, 0);
+                res -= new Resources(amt, 0);
+            }
         }
     }
 
@@ -117,21 +130,21 @@ public class Island : Selectable {
         return Mathf.Abs(sum / 2);
     }
 
-    public void DockAdded(GameObject dock)
+    public void DockAdded(Dock dock)
     {
         docks.Add(dock);
         lastBuild = Time.time;
         buildingSpots.Sort((x, y) => Vector2.Distance(x, docks[0].transform.position).CompareTo(Vector2.Distance(y, docks[0].transform.position)));
     }
 
-    /*public override void CreateInfo(GameObject panel)
+    public override void CreateInfo()
     {
-        GameObject newTitle = Instantiate(title, panel.transform);
-        newTitle.GetComponent<Text>().text = "Island";
-        GameObject newWood = Instantiate(woodNum, panel.transform);
-        newWood.GetComponentInChildren<Text>().text = (int)woodQuant + "";
+        InfoPanel infoPanel = GameManager.instance.ui.infoPanel;
+        infoPanel.Clear();
+        infoPanel.AddTitle("Island");
+        infoPanel.AddResources(res);
     }
-
+    /*
     public override void UpdateInfo(GameObject panel)
     {
         panel.transform.Find("Wood Panel(Clone)").GetComponentInChildren<Text>().text = (int)woodQuant + "";
