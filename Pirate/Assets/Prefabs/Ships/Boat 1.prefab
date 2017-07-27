@@ -651,7 +651,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerID: 0
   selected: 0
-  dock: {fileID: 1260779234714598, guid: b6e529a0369bfff43b99445e2be41f06, type: 2}
+  abilityPrefabs:
+  - {fileID: 1711187992824788, guid: 3b3a4f3fd9d0fec48a0b206bec1afa85, type: 2}
   clickPoint: {fileID: 1172764887396462, guid: 0de3817957de33b4db78498b32909872, type: 2}
 --- !u!114 &114952039649160076
 MonoBehaviour:

@@ -99,21 +99,7 @@ public class Boat : Selectable {
 
             if (Input.GetButtonDown("BuildDock") && islandsInRange.Count > 0)
             {
-                Vector2 point1 = new Vector2(0, 0);
-                Vector2 point2 = new Vector2(0, 0);
-                float min = 10000000;
-                Vector2[] pts = islandsInRange[0].GetComponent<PolygonCollider2D>().GetPath(0);
-                for (int i = 0; i < pts.Length; i++)
-                {
-                    float distance = Vector2.Distance(transform.position, pts[i] + (Vector2)islandsInRange[0].transform.position) + Vector2.Distance(new Vector2(transform.position.x, transform.position.y), pts[(i + 1) % pts.Length] + (Vector2)islandsInRange[0].transform.position);
-                    if (distance < min)
-                    {
-                        min = distance;
-                        point1 = pts[i] + (Vector2)islandsInRange[0].transform.position;
-                        point2 = pts[(i + 1) % pts.Length] + (Vector2)islandsInRange[0].transform.position;
-                    }
-                }
-                localPlayer.CmdMakeDock(new Vector2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2), Quaternion.LookRotation(Vector3.forward, -(new Vector2((point2 - point1).y, -(point2 - point1).x))), islandsInRange[0].islandID);
+                BuildDock();
             }
 
             if (Input.GetButton("Fire"))
@@ -127,6 +113,25 @@ public class Boat : Selectable {
                 }
             }
         }
+    }
+
+    public void BuildDock()
+    {
+        Vector2 point1 = new Vector2(0, 0);
+        Vector2 point2 = new Vector2(0, 0);
+        float min = 10000000;
+        Vector2[] pts = islandsInRange[0].GetComponent<PolygonCollider2D>().GetPath(0);
+        for (int i = 0; i < pts.Length; i++)
+        {
+            float distance = Vector2.Distance(transform.position, pts[i] + (Vector2)islandsInRange[0].transform.position) + Vector2.Distance(new Vector2(transform.position.x, transform.position.y), pts[(i + 1) % pts.Length] + (Vector2)islandsInRange[0].transform.position);
+            if (distance < min)
+            {
+                min = distance;
+                point1 = pts[i] + (Vector2)islandsInRange[0].transform.position;
+                point2 = pts[(i + 1) % pts.Length] + (Vector2)islandsInRange[0].transform.position;
+            }
+        }
+        localPlayer.CmdMakeDock(new Vector2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2), Quaternion.LookRotation(Vector3.forward, -(new Vector2((point2 - point1).y, -(point2 - point1).x))), islandsInRange[0].islandID);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -157,5 +162,15 @@ public class Boat : Selectable {
         InfoPanel infoPanel = GameManager.instance.ui.infoPanel;
         infoPanel.Clear();
         infoPanel.AddTitle("Boat");
+    }
+
+    public override void UseAbility(string name)
+    {
+        switch (name)
+        {
+            case "Build Dock":
+                BuildDock();
+                break;
+        }
     }
 }
