@@ -6,16 +6,20 @@ using UnityEngine.Networking;
 
 public class Boat : Selectable {
 
-	Rigidbody2D rb2d;
+    Rigidbody2D rb2d;
     Cannon[] cannons;
     List<Island> islandsInRange;
+    List<Dock> docksInRange;
     Queue<GameObject> clickPoints;
     public GameObject clickPoint;
     bool oarsActive;
 
+    [SyncVar]
+    public Resources res;
+
     public Health health;
 
-    
+
 
     // Use this for initialization
     new void Start()
@@ -27,6 +31,7 @@ public class Boat : Selectable {
         rb2d = GetComponent<Rigidbody2D>();
         cannons = GetComponentsInChildren<Cannon>();
         islandsInRange = new List<Island>();
+        docksInRange = new List<Dock>();
         clickPoints = new Queue<GameObject>();
         oarsActive = false;
     }
@@ -34,11 +39,11 @@ public class Boat : Selectable {
 
 
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate() {
         oarsActive = false;
         if (selected && ownerID == localPlayer.playerID)
         {
-            
+
             if (Mathf.Abs(Input.GetAxis("Vertical")) > .005 || Mathf.Abs(Input.GetAxis("Horizontal")) > .005)
             {
                 oarsActive = true;
@@ -51,10 +56,10 @@ public class Boat : Selectable {
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.z -= 0.5f * Input.GetAxis("Horizontal");
             transform.rotation = Quaternion.Euler(rotation);
-            
-            
 
-            
+
+
+
         }
         if (clickPoints.Count > 0)
         {
@@ -76,8 +81,8 @@ public class Boat : Selectable {
             }
         }
 
-        
-	}
+
+    }
 
     void Update()
     {
@@ -119,6 +124,11 @@ public class Boat : Selectable {
 
     public void BuildDock()
     {
+        if (res.wood < 5)
+        {
+            return;
+        }
+        res -= new Resources(5, 0);
         Vector2 point1 = new Vector2(0, 0);
         Vector2 point2 = new Vector2(0, 0);
         float min = 10000000;
@@ -142,6 +152,9 @@ public class Boat : Selectable {
         {
             other.gameObject.GetComponent<Island>().InRange();
             islandsInRange.Add(other.gameObject.GetComponent<Island>());
+        } else if (other.gameObject.GetComponent<Dock>() != null && other.gameObject.GetComponent<Dock>().ownerID == localPlayer.playerID)
+        {
+            docksInRange.Add(other.gameObject.GetComponent<Dock>());
         }
     }
 
@@ -151,6 +164,10 @@ public class Boat : Selectable {
         {
             other.gameObject.GetComponent<Island>().OutOfRange();
             islandsInRange.Remove(other.gameObject.GetComponent<Island>());
+        }
+        else if (other.gameObject.GetComponent<Dock>() != null && other.gameObject.GetComponent<Dock>().ownerID == localPlayer.playerID)
+        {
+            docksInRange.Remove(other.gameObject.GetComponent<Dock>());
         }
     }
 
@@ -164,13 +181,33 @@ public class Boat : Selectable {
         InfoPanel infoPanel = GameManager.instance.ui.infoPanel;
         infoPanel.Clear();
         infoPanel.AddTitle("Boat");
-        infoPanel.AddHealthBar(health.GetHealthFloat());
+        infoPanel.AddHealthBar(health);
+        infoPanel.AddResources(res);
     }
 
     public override void UpdateInfo()
     {
         InfoPanel infoPanel = GameManager.instance.ui.infoPanel;
-        infoPanel.UpdateHealth(health.GetHealthFloat());
+        infoPanel.UpdateHealth(health);
+        infoPanel.UpdateResources(res);
+    }
+
+    public void WoodAway()
+    {
+        if (res.wood >= 1 && docksInRange.Count > 0)
+        {
+            res -= new Resources(1, 0);
+            docksInRange[0].res += new Resources(1, 0);
+        }
+    }
+
+    public void WoodHere()
+    {
+        if (docksInRange[0].res.wood >= 1 && docksInRange.Count > 0)
+        {
+            res += new Resources(1, 0);
+            docksInRange[0].res -= new Resources(1, 0);
+        }
     }
 
     public override void UseAbility(string name)
@@ -179,6 +216,12 @@ public class Boat : Selectable {
         {
             case "Build Dock":
                 BuildDock();
+                break;
+            case "Wood Away":
+                WoodAway();
+                break;
+            case "Wood Here":
+                WoodHere();
                 break;
         }
     }

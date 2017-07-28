@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 61158799213330652}
   - component: {fileID: 114201970661189324}
   - component: {fileID: 114995812159223898}
+  - component: {fileID: 114589864449532904}
   m_Layer: 0
   m_Name: Dock
   m_TagString: Untagged
@@ -80,11 +81,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerID: 0
+  localPlayer: {fileID: 0}
   selected: 0
   abilityPrefabs:
   - {fileID: 1186701875243968, guid: 742d2b65d47d89b4fbb17a37f9bc133a, type: 2}
   boat: {fileID: 1072268924226698, guid: 149b645cbc4d1a74b8156604132b4f7e, type: 2}
   islandID: 0
+  health: {fileID: 114589864449532904}
+--- !u!114 &114589864449532904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1260779234714598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d3468ff945ca24dad13e2b9ebff394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 200
 --- !u!114 &114995812159223898
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,12 +19,22 @@ public class Player : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
         playerID = GameManager.instance.AddPlayer(this);
-	}
+        if (isLocalPlayer)
+        {
+            CmdMakeSpawnBoat();
+        }
+    }
     
+    /*[ClientRpc]
+    public void RpcSetPlayerID(int id)
+    {
+        playerID = id;
+    }*/
 
     public override void OnStartLocalPlayer()
     {
         GameManager.instance.localPlayer = this;
+        
     }
 
     // Update is called once per frame
@@ -45,7 +55,7 @@ public class Player : NetworkBehaviour {
                     SelectNew(hit.collider.gameObject.GetComponent<Selectable>());
                 } else
                 {
-                    CmdMakeBoat(Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+                    //CmdMakeBoat(Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                 }
                 
             }
@@ -79,6 +89,15 @@ public class Player : NetworkBehaviour {
         NetworkServer.Spawn(newCannonball);
     }
 
+    [Command]
+    public void CmdMakeSpawnBoat()
+    {
+        GameObject newBoat = Instantiate(boat, GameManager.instance.map.spawnPoints[playerID], Quaternion.identity);
+        newBoat.GetComponent<Selectable>().ownerID = playerID;
+        newBoat.GetComponent<Boat>().res = new Resources(10, 0);
+        NetworkServer.SpawnWithClientAuthority(newBoat, gameObject);
+    }
+
     public void UseAbility(string name)
     {
         selected.UseAbility(name);
@@ -98,5 +117,16 @@ public class Player : NetworkBehaviour {
             selected.CreateAbilites();
         }
         
+    }
+
+    void SelectNull()
+    {
+        if (selected != null)
+        {
+            selected.Deselect();
+        }
+        selected = null;
+        GameManager.instance.ui.ClearAbilities();
+        GameManager.instance.ui.infoPanel.Clear();
     }
 }

@@ -14,6 +14,8 @@ public class Dock : Selectable {
     [SyncVar]
     public int islandID;
 
+    public Health health;
+
 	// Use this for initialization
 	new void Start () {
         base.Start();
@@ -33,12 +35,14 @@ public class Dock : Selectable {
         infoPanel.Clear();
         infoPanel.AddTitle("Dock");
         infoPanel.AddResources(res);
+        infoPanel.AddHealthBar(health);
     }
 
     public override void UpdateInfo()
     {
         InfoPanel infoPanel = GameManager.instance.ui.infoPanel;
         infoPanel.UpdateResources(res);
+        infoPanel.UpdateHealth(health);
     }
 
     public override void UseAbility(string name)

@@ -27,6 +27,8 @@ public class Map : NetworkBehaviour {
     [SyncVar]
     int numIslands;
 
+    public Dictionary<int, Vector2> spawnPoints;
+
     void Awake()
     {
         if (NetworkServer.active)
@@ -97,6 +99,23 @@ public class Map : NetworkBehaviour {
         islands = new Island[numIslands];
         sprite = Sprite.Create(tex, new Rect(0, 0, width, height), new Vector2(.5f, .5f));
         sr.sprite = sprite;
+
+        spawnPoints = new Dictionary<int, Vector2>();
+
+        Vector2 spawnPoint1 = new Vector2(1 - (float) width / 200, 1 - (float) height / 200);
+        while (GetElevation(spawnPoint1.x, spawnPoint1.y) < buildingCutoff / colors.Length)
+        {
+            spawnPoint1 += new Vector2(.1f, 0);
+        }
+        spawnPoints.Add(1, spawnPoint1);
+
+        Vector2 spawnPoint2 = new Vector2((float)width / 200 - 1, (float)height / 200 - 1);
+        while (GetElevation(spawnPoint2.x, spawnPoint2.y) < buildingCutoff / colors.Length)
+        {
+            spawnPoint2 -= new Vector2(.1f, 0);
+        }
+        spawnPoints.Add(2, spawnPoint2);
+
     }
 
     // Update is called once per frame

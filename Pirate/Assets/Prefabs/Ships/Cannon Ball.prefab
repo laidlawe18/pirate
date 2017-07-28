@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb517548c790dfc43ad0a3df2248fbf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
   waterSplash: {fileID: 1843726522580894, guid: 63b1b3ebe6ff89440a4926b2b33b50f9,
     type: 2}
   sandSplash: {fileID: 1102568946214736, guid: 9ff1c30f917dada439dd7379c9b54b49, type: 2}

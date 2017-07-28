@@ -53,13 +53,13 @@ public class InfoPanel : MonoBehaviour {
         }
     }
 
-    public void AddHealthBar(float health)
+    public void AddHealthBar(Health health)
     {
         healthBar = Instantiate(healthBarPrefab, transform).GetComponent<HealthBar>();
         healthBar.UpdateHealth(health);
     }
 
-    public void UpdateHealth(float health)
+    public void UpdateHealth(Health health)
     {
         healthBar.UpdateHealth(health);
     }
