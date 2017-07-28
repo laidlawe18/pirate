@@ -8,7 +8,7 @@ public class Selectable : NetworkBehaviour {
     [SyncVar]
     public int ownerID;
 
-    protected Player localPlayer;
+    public Player localPlayer;
 
     public bool selected;
 

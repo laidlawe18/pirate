@@ -13,6 +13,8 @@ public class Boat : Selectable {
     public GameObject clickPoint;
     bool oarsActive;
 
+    public Health health;
+
     
 
     // Use this for initialization
@@ -162,6 +164,13 @@ public class Boat : Selectable {
         InfoPanel infoPanel = GameManager.instance.ui.infoPanel;
         infoPanel.Clear();
         infoPanel.AddTitle("Boat");
+        infoPanel.AddHealthBar(health.GetHealthFloat());
+    }
+
+    public override void UpdateInfo()
+    {
+        InfoPanel infoPanel = GameManager.instance.ui.infoPanel;
+        infoPanel.UpdateHealth(health.GetHealthFloat());
     }
 
     public override void UseAbility(string name)

@@ -22,6 +22,9 @@ GameObject:
   - component: {fileID: 212214057112784396}
   - component: {fileID: 50945634967770232}
   - component: {fileID: 58424717341141068}
+  - component: {fileID: 114739126016091044}
+  - component: {fileID: 114394341085610720}
+  - component: {fileID: 114449521819492456}
   m_Layer: 0
   m_Name: Cannon Ball
   m_TagString: Untagged
@@ -77,6 +80,75 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.030064587
+--- !u!114 &114394341085610720
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005041610009832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114449521819492456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005041610009832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb517548c790dfc43ad0a3df2248fbf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  waterSplash: {fileID: 1843726522580894, guid: 63b1b3ebe6ff89440a4926b2b33b50f9,
+    type: 2}
+  sandSplash: {fileID: 1102568946214736, guid: 9ff1c30f917dada439dd7379c9b54b49, type: 2}
+  woodSplash: {fileID: 1538005942185962, guid: e7afb1ff6c8b78c45bd946e647be8398, type: 2}
+--- !u!114 &114739126016091044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005041610009832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 115
+    i1: 158
+    i2: 190
+    i3: 25
+    i4: 211
+    i5: 4
+    i6: 249
+    i7: 244
+    i8: 250
+    i9: 157
+    i10: 219
+    i11: 122
+    i12: 66
+    i13: 115
+    i14: 30
+    i15: 113
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212214057112784396
 SpriteRenderer:
   m_ObjectHideFlags: 1

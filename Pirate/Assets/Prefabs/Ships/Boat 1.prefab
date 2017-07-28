@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114910796458601808}
   - component: {fileID: 114952039649160076}
   - component: {fileID: 114297668476577888}
+  - component: {fileID: 114471349414443148}
   m_Layer: 0
   m_Name: Boat 1
   m_TagString: Untagged
@@ -586,10 +587,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: -0.2, y: -0.2}
-  force: {x: -300, y: 0}
-  cannonBall: {fileID: 1005041610009832, guid: 739ebe19d304f9f4fa9ddb7a42731e71, type: 2}
+  force: {x: -3, y: 0}
   right: 0
   delay: 0.5
+--- !u!114 &114471349414443148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072268924226698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d3468ff945ca24dad13e2b9ebff394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
 --- !u!114 &114671545253013592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -602,8 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0.2, y: -0.2}
-  force: {x: 300, y: 0}
-  cannonBall: {fileID: 1005041610009832, guid: 739ebe19d304f9f4fa9ddb7a42731e71, type: 2}
+  force: {x: 3, y: 0}
   right: 1
   delay: 0.5
 --- !u!114 &114712699481253710
@@ -618,8 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: 0.2, y: 0.15}
-  force: {x: 300, y: 0}
-  cannonBall: {fileID: 1005041610009832, guid: 739ebe19d304f9f4fa9ddb7a42731e71, type: 2}
+  force: {x: 3, y: 0}
   right: 1
   delay: 0.1
 --- !u!114 &114777265794586284
@@ -634,8 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {x: -0.2, y: 0.15}
-  force: {x: -300, y: 0}
-  cannonBall: {fileID: 1005041610009832, guid: 739ebe19d304f9f4fa9ddb7a42731e71, type: 2}
+  force: {x: -3, y: 0}
   right: 0
   delay: 0.1
 --- !u!114 &114910796458601808
@@ -650,10 +660,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerID: 0
+  localPlayer: {fileID: 0}
   selected: 0
   abilityPrefabs:
   - {fileID: 1711187992824788, guid: 3b3a4f3fd9d0fec48a0b206bec1afa85, type: 2}
   clickPoint: {fileID: 1172764887396462, guid: 0de3817957de33b4db78498b32909872, type: 2}
+  health: {fileID: 114471349414443148}
 --- !u!114 &114952039649160076
 MonoBehaviour:
   m_ObjectHideFlags: 1

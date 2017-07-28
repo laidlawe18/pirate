@@ -87,3 +87,4 @@ MonoBehaviour:
   playerID: 0
   boat: {fileID: 1072268924226698, guid: 149b645cbc4d1a74b8156604132b4f7e, type: 2}
   dock: {fileID: 1260779234714598, guid: b6e529a0369bfff43b99445e2be41f06, type: 2}
+  cannonball: {fileID: 1005041610009832, guid: 739ebe19d304f9f4fa9ddb7a42731e71, type: 2}

@@ -6,7 +6,6 @@ public class Cannon : MonoBehaviour {
 
     public Vector2 spawnPoint;
     public Vector2 force;
-    public GameObject cannonBall;
     public bool right;
     public float delay;
 
@@ -33,10 +32,8 @@ public class Cannon : MonoBehaviour {
         {
             firedTime = Time.time;
             anim.SetInteger("State", 1);
-
-            GameObject ball = Instantiate(cannonBall, transform.rotation * spawnPoint + transform.position, transform.rotation);
-            ball.GetComponent<Rigidbody2D>().AddForce(Quaternion.Euler(0, 0, Random.Range(-2, 2)) * transform.rotation * force);
-            Destroy(ball, 1.5f);
+            
+            GameManager.instance.localPlayer.CmdFireCannonball(transform.rotation * spawnPoint + transform.position, transform.rotation, Quaternion.Euler(0, 0, Random.Range(-2, 2)) * transform.rotation * force);
         }
     }
 }

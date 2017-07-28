@@ -7,8 +7,10 @@ public class InfoPanel : MonoBehaviour {
 
     public GameObject titlePrefab;
     public GameObject resourcePanelPrefab;
+    public GameObject healthBarPrefab;
 
     List<ResourcePanel> resourcePanels;
+    HealthBar healthBar;
 
 	// Use this for initialization
 	void Start () {
@@ -49,5 +51,16 @@ public class InfoPanel : MonoBehaviour {
         {
             resPanel.UpdateResources(res);
         }
+    }
+
+    public void AddHealthBar(float health)
+    {
+        healthBar = Instantiate(healthBarPrefab, transform).GetComponent<HealthBar>();
+        healthBar.UpdateHealth(health);
+    }
+
+    public void UpdateHealth(float health)
+    {
+        healthBar.UpdateHealth(health);
     }
 }

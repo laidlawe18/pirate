@@ -12,6 +12,7 @@ public class Player : NetworkBehaviour {
 
     public GameObject boat;
     public GameObject dock;
+    public GameObject cannonball;
 
     Selectable selected;
 
@@ -66,6 +67,16 @@ public class Player : NetworkBehaviour {
         newDock.GetComponent<Selectable>().ownerID = playerID;
         newDock.GetComponent<Dock>().islandID = islandID;
         NetworkServer.SpawnWithClientAuthority(newDock, gameObject);
+    }
+
+    [Command]
+    public void CmdFireCannonball(Vector2 pos, Quaternion rotation, Vector2 force)
+    {
+        GameObject newCannonball = Instantiate(cannonball, pos, rotation);
+        newCannonball.GetComponent<Rigidbody2D>().velocity = force;
+        print(newCannonball.GetComponent<Rigidbody2D>().velocity);
+        newCannonball.GetComponent<Cannonball>().Invoke("DestroyWaterSplash", 1.5f);
+        NetworkServer.Spawn(newCannonball);
     }
 
     public void UseAbility(string name)
