@@ -17,24 +17,21 @@ public class Player : NetworkBehaviour {
     Selectable selected;
 
 	// Use this for initialization
-	void Start () {
-        playerID = GameManager.instance.AddPlayer(this);
-        if (isLocalPlayer)
+	public override void OnStartClient () {
+        if (isServer)
         {
+            print("server");
+            playerID = GameManager.instance.AddPlayer(this);
             CmdMakeSpawnBoat();
+        } else
+        {
+            GameManager.instance.AddPlayer(this);
         }
-    }
-    
-    /*[ClientRpc]
-    public void RpcSetPlayerID(int id)
-    {
-        playerID = id;
-    }*/
+	}
 
     public override void OnStartLocalPlayer()
     {
         GameManager.instance.localPlayer = this;
-        
     }
 
     // Update is called once per frame
@@ -56,6 +53,7 @@ public class Player : NetworkBehaviour {
                 } else
                 {
                     //CmdMakeBoat(Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+                    SelectNull();
                 }
                 
             }
@@ -115,6 +113,9 @@ public class Player : NetworkBehaviour {
         if (selected.ownerID == GameManager.instance.localPlayer.playerID)
         {
             selected.CreateAbilites();
+        } else
+        {
+            GameManager.instance.ui.ClearAbilities();
         }
         
     }

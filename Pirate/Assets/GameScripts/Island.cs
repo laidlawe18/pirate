@@ -100,6 +100,11 @@ public class Island : Selectable {
     {
         foreach (Dock dock in docks)
         {
+            if (dock.gameObject == null)
+            {
+                docks.Remove(dock);
+                continue;
+            }
             if (dock.isServer)
             {
                 float amt = Mathf.Min(res.wood, Random.Range(.9f, 1.1f) * (10 + buildings.Count) * .0001f * woodGatherRate / (docks.Count + 5f));

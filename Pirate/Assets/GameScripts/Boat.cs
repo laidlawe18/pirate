@@ -203,7 +203,7 @@ public class Boat : Selectable {
 
     public void WoodHere()
     {
-        if (docksInRange[0].res.wood >= 1 && docksInRange.Count > 0)
+        if (docksInRange.Count > 0 && docksInRange[0].res.wood >= 1)
         {
             res += new Resources(1, 0);
             docksInRange[0].res -= new Resources(1, 0);
