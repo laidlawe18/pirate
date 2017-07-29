@@ -23,11 +23,18 @@ public class Player : NetworkBehaviour {
             print("server");
             playerID = GameManager.instance.AddPlayer(this);
             CmdMakeSpawnBoat();
+            RpcAddToGM();
         } else
         {
             GameManager.instance.AddPlayer(this);
         }
 	}
+
+    [ClientRpc]
+    public void RpcAddToGM()
+    {
+        GameManager.instance.AddPlayer(this);
+    }
 
     public override void OnStartLocalPlayer()
     {

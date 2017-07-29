@@ -12,14 +12,31 @@ public class Boat : Selectable {
     List<Dock> docksInRange;
     Queue<GameObject> clickPoints;
     public GameObject clickPoint;
+
+    public SpriteRenderer minimapIcon;
+
+    [SyncVar]
     bool oarsActive;
+
+    [SyncVar]
+    public bool sailsOut = false;
 
     [SyncVar]
     public Resources res;
 
     public Health health;
 
+    public float oarSpeed;
+    public float turnSpeed;
+    public float sailMultiplier;
 
+    public Vector2 anchorPoint;
+    public float anchorDistance;
+
+    [SyncVar]
+    bool anchorDown;
+
+    DistanceJoint2D anchor;
 
     // Use this for initialization
     new void Start()
@@ -34,12 +51,36 @@ public class Boat : Selectable {
         docksInRange = new List<Dock>();
         clickPoints = new Queue<GameObject>();
         oarsActive = false;
+
+        if (ownerID != localPlayer.playerID)
+        {
+            minimapIcon.color = Color.red;
+            //GetComponent<SpriteRenderer>().color = Color.red;
+        } else
+        {
+            minimapIcon.color = Color.blue;
+            //GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+        
     }
 
 
 
     // Update is called once per frame
     void FixedUpdate() {
+
+        if (localPlayer.isLocalPlayer)
+        {
+            //print(GameManager.instance.map.wind);
+            if (sailsOut)
+            {
+                rb2d.AddForce(GameManager.instance.map.wind + (Vector2)transform.up * Vector2.Dot(GameManager.instance.map.wind, transform.up) * sailMultiplier);
+            } else
+            {
+                rb2d.AddForce(GameManager.instance.map.wind);
+            }
+            
+        }
         oarsActive = false;
         if (selected && ownerID == localPlayer.playerID)
         {
@@ -52,9 +93,9 @@ public class Boat : Selectable {
                     Destroy(clickPoints.Dequeue());
                 }
             }
-            rb2d.AddForce(100 * transform.up * Input.GetAxis("Vertical"));
+            rb2d.AddForce(oarSpeed * transform.up * Input.GetAxis("Vertical"));
             Vector3 rotation = transform.rotation.eulerAngles;
-            rotation.z -= 0.5f * Input.GetAxis("Horizontal");
+            rotation.z -= turnSpeed * Input.GetAxis("Horizontal");
             transform.rotation = Quaternion.Euler(rotation);
 
 
@@ -74,10 +115,10 @@ public class Boat : Selectable {
                 Vector3 rot = Quaternion.FromToRotation(transform.up, pt - transform.position).eulerAngles;
                 Vector3 boatRot = transform.rotation.eulerAngles;
                 rot.z = rot.z > 180 ? rot.z - 360 : rot.z;
-                boatRot.z += Mathf.Sign(rot.z) * Mathf.Min(Mathf.Abs(rot.z), .5f);
+                boatRot.z += Mathf.Sign(rot.z) * Mathf.Min(Mathf.Abs(rot.z), turnSpeed);
                 transform.rotation = Quaternion.Euler(boatRot);
                 oarsActive = true;
-                rb2d.AddForce(100 * transform.up * Vector2.Dot((pt - transform.position).normalized, transform.up.normalized));
+                rb2d.AddForce(oarSpeed * transform.up * Vector2.Dot((pt - transform.position).normalized, transform.up.normalized));
             }
         }
 
@@ -119,6 +160,25 @@ public class Boat : Selectable {
                     }
                 }
             }
+
+            if (Input.GetButtonDown("Space"))
+            {
+                ToggleSails();
+            }
+        }
+
+        if (anchorDown && anchor == null)
+        {
+            anchor = gameObject.AddComponent<DistanceJoint2D>();
+            anchor.autoConfigureDistance = false;
+            anchor.distance = anchorDistance;
+            anchor.maxDistanceOnly = true;
+            anchor.connectedAnchor = transform.position + transform.up * .5f;
+            anchor.anchor = anchorPoint;
+        } else if (!anchorDown && anchor != null)
+        {
+            Destroy(anchor);
+            anchor = null;
         }
     }
 
@@ -210,6 +270,16 @@ public class Boat : Selectable {
         }
     }
 
+    public void ToggleSails()
+    {
+        sailsOut = !sailsOut;
+    }
+
+    public void ToggleAnchor()
+    {
+        anchorDown = !anchorDown;
+    }
+
     public override void UseAbility(string name)
     {
         switch (name)
@@ -222,6 +292,12 @@ public class Boat : Selectable {
                 break;
             case "Wood Here":
                 WoodHere();
+                break;
+            case "Sails":
+                ToggleSails();
+                break;
+            case "Drop Anchor":
+                ToggleAnchor();
                 break;
         }
     }

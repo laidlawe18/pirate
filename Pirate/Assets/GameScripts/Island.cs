@@ -31,6 +31,8 @@ public class Island : Selectable {
     new void Start()
     {
         GetComponent<PolygonCollider2D>().SetPath(0, GameManager.instance.map.SetIslandByID(islandID, this));
+
+        res = new Resources(Area(GetComponent<PolygonCollider2D>().GetPath(0)) * woodMult * 50, 0);
         base.Start();
         docks = new List<Dock>();
         buildings = new List<GameObject>();
@@ -79,8 +81,6 @@ public class Island : Selectable {
     public void SetResourceMult(float wood)
     {
         woodMult = wood;
-        res = new Resources(Area(GetComponent<PolygonCollider2D>().GetPath(0)) * woodMult * 50, 0);
-        print(res);
     }
 
     // Update is called once per frame

@@ -25,6 +25,16 @@ public class Map : NetworkBehaviour {
     Vector2 offset;
 
     [SyncVar]
+    public Vector2 wind;
+
+    Vector2 windXOffset;
+    Vector2 windYOffset;
+    float startWindTime;
+
+    public float windChangeRate = .001f;
+    public float windPower = 200f;
+
+    [SyncVar]
     int numIslands;
 
     public Dictionary<int, Vector2> spawnPoints;
@@ -103,24 +113,35 @@ public class Map : NetworkBehaviour {
         spawnPoints = new Dictionary<int, Vector2>();
 
         Vector2 spawnPoint1 = new Vector2(1 - (float) width / 200, 1 - (float) height / 200);
-        while (GetElevation(spawnPoint1.x, spawnPoint1.y) < buildingCutoff / colors.Length)
+        while (GetElevation(spawnPoint1.x, spawnPoint1.y) < (float)buildingCutoff / colors.Length)
         {
             spawnPoint1 += new Vector2(.1f, 0);
         }
         spawnPoints.Add(1, spawnPoint1);
 
         Vector2 spawnPoint2 = new Vector2((float)width / 200 - 1, (float)height / 200 - 1);
-        while (GetElevation(spawnPoint2.x, spawnPoint2.y) < buildingCutoff / colors.Length)
+        while (GetElevation(spawnPoint2.x, spawnPoint2.y) < (float)buildingCutoff / colors.Length)
         {
             spawnPoint2 -= new Vector2(.1f, 0);
         }
         spawnPoints.Add(2, spawnPoint2);
 
+
+        if(isServer)
+        {
+            windXOffset = new Vector2(Random.Range(0, 100000), Random.Range(0, 100000));
+            windYOffset = new Vector2(Random.Range(0, 100000), Random.Range(0, 100000));
+            startWindTime = Time.time;
+            wind = new Vector2((Mathf.PerlinNoise(windXOffset.x + (Time.time - startWindTime) * windChangeRate, windXOffset.y) - 0.5f) * windPower, (Mathf.PerlinNoise(windYOffset.x + (Time.time - startWindTime) * windChangeRate, windYOffset.y) - 0.5f) * windPower);
+        }
     }
 
     // Update is called once per frame
     void Update () {
-		
+		if (isServer)
+        {
+            wind = new Vector2((Mathf.PerlinNoise(windXOffset.x + (Time.time - startWindTime) * windChangeRate, windXOffset.y) * windPower) - windPower / 2, (Mathf.PerlinNoise(windYOffset.x + (Time.time - startWindTime) * windChangeRate, windYOffset.y) * windPower) - windPower / 2);
+        }
 	}
 
     public float GetElevation(float x, float y)
