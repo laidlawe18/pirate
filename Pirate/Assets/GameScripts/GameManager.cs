@@ -36,8 +36,9 @@ public class GameManager : NetworkBehaviour {
             NetworkServer.Spawn(newMap);
             map = newMap.GetComponent<Map>();
         }
-        ui.gameObject.SetActive(true);
         map.Init();
+        ui.gameObject.SetActive(true);
+        
         Camera.main.GetComponent<CameraMovement>().setBounds(map.width / 200f, map.height / 200f);
         if (isClient)
         {

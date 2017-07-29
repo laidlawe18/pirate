@@ -649,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c5fc40707214f43921ebf3037b45e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {x: -0.2, y: -0.2}
+  spawnPoint: {x: -0.2, y: -0.1}
   force: {x: -3, y: 0}
   right: 0
   delay: 0.5
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c5fc40707214f43921ebf3037b45e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {x: 0.2, y: -0.2}
+  spawnPoint: {x: 0.2, y: -0.1}
   force: {x: 3, y: 0}
   right: 1
   delay: 0.5

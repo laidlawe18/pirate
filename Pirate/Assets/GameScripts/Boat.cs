@@ -184,7 +184,7 @@ public class Boat : Selectable {
 
     public void BuildDock()
     {
-        if (res.wood < 5)
+        if (res.wood < 5 || islandsInRange.Count == 0)
         {
             return;
         }
