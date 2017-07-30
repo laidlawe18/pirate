@@ -112,14 +112,14 @@ public class Map : NetworkBehaviour {
 
         spawnPoints = new Dictionary<int, Vector2>();
 
-        Vector2 spawnPoint1 = new Vector2(1 - (float) width / 200, 1 - (float) height / 200);
+        Vector2 spawnPoint1 = new Vector2(2 - (float) width / 200, 2 - (float) height / 200);
         while (GetElevation(spawnPoint1.x, spawnPoint1.y) < (float)buildingCutoff / colors.Length)
         {
             spawnPoint1 += new Vector2(.1f, 0);
         }
         spawnPoints.Add(1, spawnPoint1);
 
-        Vector2 spawnPoint2 = new Vector2((float)width / 200 - 1, (float)height / 200 - 1);
+        Vector2 spawnPoint2 = new Vector2((float)width / 200 - 2, (float)height / 200 - 2);
         while (GetElevation(spawnPoint2.x, spawnPoint2.y) < (float)buildingCutoff / colors.Length)
         {
             spawnPoint2 -= new Vector2(.1f, 0);
